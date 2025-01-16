@@ -2,19 +2,21 @@ body {
     font-family: 'Roboto', sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #FFFAEC; 
+    background-color: #4a4a4a; 
     color: #333;
 }
 
 .container {
     margin-top: 20px;
+    display: grid;
+    justify-content: center;
 }
 
 .sidebar {
-    background-color: #578E7E;
+    background-color: #ff6d1f;
     color:rgb(10, 10, 10);
     padding: 20px;
-    box-shadow: 2px 0 5px rgb(147, 165, 99);
+    box-shadow: 2px 0 5px rgb(182, 85, 33);
 }
 
 .sidebar h2 {
@@ -47,5 +49,37 @@ body {
 
 .content {
     padding: 20px;
-    background-color: #F5ECD5;
+    background-color: #e0e0e0;
+}
+
+#posts {
+    background-color: #ff6d1f;
+}
+
+#posts .list-group-item {
+    background-color: #ffffff; /* Set background color to white */
+    margin-bottom: 10px; /* Add separation between items */
+    border: 1px solid #ddd; /* Add a border to the items */
+}
+
+#posts .list-group-item.active {
+    background-color: #ffffff; /* Ensure active items also have a white background */
+    border-color: #ddd; /* Ensure active items have the same border color */
+}
+
+.carousel {
+    margin-top: 60px;
+}
+
+.btn-custom {
+    background-color: #ff6d1f;
+    color: white;
+    border: none;
+}
+
+.hero {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    margin-top: 100px;
 }

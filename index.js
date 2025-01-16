@@ -3,8 +3,12 @@ import bodyParser from 'body-parser';
 
 const app = express();
 const port = 3000;
+
 //Allows use of static files in public folder
 app.use(express.static("public"));
+
+// Allows use of req.body
+app.use(bodyParser.urlencoded({ extended: true }));
 
 //data structure for posts
 const posts = [
@@ -12,9 +16,12 @@ const posts = [
     { title: "Second Post", content: "This is the content of the second post" }
 ];
 
-// Allows use of req.body
-app.use(bodyParser.urlencoded({ extended: true }));
 app.get('/', (req, res) => {
+    res.render("home.ejs");
+});
+
+//Route for the blog page
+app.get('/blog', (req, res) => {
     res.render("index.ejs", {posts: posts});
 });
 
@@ -27,9 +34,9 @@ app.post('/submit', (req, res) =>{
         content: req.body.content
     };
     posts.push(newPost);
-    res.redirect('/')
+    res.redirect('/blog')
 
-    res.render("index.ejs", { title: articleTitle, content: articleContent})
+    // res.render("index.ejs", { title: articleTitle, content: articleContent})
 })
 
 app.listen(port, () => {
