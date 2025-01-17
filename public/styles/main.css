@@ -16,6 +16,7 @@ body {
     background-color: #ff6d1f;
     color:rgb(10, 10, 10);
     padding: 20px;
+    margin-right: 20px;
     box-shadow: 2px 0 5px rgb(182, 85, 33);
 }
 
@@ -48,6 +49,7 @@ body {
 }
 
 .content {
+    
     padding: 20px;
     background-color: #e0e0e0;
 }
@@ -82,4 +84,9 @@ body {
     justify-content: center;
     align-content: center;
     margin-top: 100px;
+}
+
+.post-row > div > div {
+    background-color: #ffffff;
+    
 }

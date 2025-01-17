@@ -12,8 +12,9 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 //data structure for posts
 const posts = [
-    { title: "School is hard", content: "Professors and procrastinating can make school hard" },
-    { title: "Second Post", content: "This is the content of the second post" }
+    { title: "School is hard", content: "Professors and procrastinating can make school hard", category: "Other"},
+    { title: "Why School Matters", content: "IT is important to build connections and network", category: "Other"},
+    { title: "Computer Science is HARD", content: "Although Comp Sci is hard it is very interesting and fun to learn", category: "Computer Science"}
 ];
 
 app.get('/', (req, res) => {
@@ -31,7 +32,8 @@ app.get('/blog', (req, res) => {
 app.post('/submit', (req, res) =>{
     const newPost = {
         title: req.body.title,
-        content: req.body.content
+        content: req.body.content,
+        category: req.body.category
     };
     posts.push(newPost);
     res.redirect('/blog')
