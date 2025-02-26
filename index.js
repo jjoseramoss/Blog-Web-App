@@ -1,28 +1,45 @@
 import express from 'express';
 import bodyParser from 'body-parser';
+import pg from "pg";
 
 const app = express();
 const port = 3000;
 
+const db = new pg.Client({
+    user: "postgres",
+    host: "localhost",
+    database: "blog",
+    password: "ONEpiece4LIFE$",
+    port: 5432.
+});
+db.connect();
+
 //Allows use of static files in public folder
 app.use(express.static("public"));
+
+
+async function getAllPosts(){
+    const result = await db.query("SELECT category, title, content FROM posts");
+    let posts = [];
+    result.rows.forEach((post) => {
+        posts.push({category: post.category, title: post.title, content: post.content});
+    });
+    console.log(posts);
+    return posts;
+}
 
 // Allows use of req.body
 app.use(bodyParser.urlencoded({ extended: true }));
 
 //data structure for posts
-const posts = [
-    { title: "School is hard", content: "Professors and procrastinating can make school hard", category: "Other"},
-    { title: "Why School Matters", content: "IT is important to build connections and network", category: "Other"},
-    { title: "Computer Science is HARD", content: "Although Comp Sci is hard it is very interesting and fun to learn", category: "Computer Science"}
-];
 
 app.get('/', (req, res) => {
     res.render("home.ejs");
 });
 
 //Route for the blog page
-app.get('/blog', (req, res) => {
+app.get('/blog', async(req, res) => {
+    const posts = await getAllPosts();
     res.render("index.ejs", {posts: posts});
 });
 
@@ -38,7 +55,6 @@ app.post('/submit', (req, res) =>{
     posts.push(newPost);
     res.redirect('/blog')
 
-    // res.render("index.ejs", { title: articleTitle, content: articleContent})
 })
 
 app.listen(port, () => {

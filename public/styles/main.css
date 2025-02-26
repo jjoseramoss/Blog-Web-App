@@ -2,8 +2,9 @@ body {
     font-family: 'Roboto', sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #4a4a4a; 
-    color: #333;
+    background-color: #f5f5f5;
+    color: #2d3436;
+    line-height: 1.6;
 }
 
 .container {
@@ -55,18 +56,23 @@ body {
 }
 
 #posts {
-    background-color: #ff6d1f;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 20px;
 }
 
 #posts .list-group-item {
-    background-color: #ffffff; /* Set background color to white */
-    margin-bottom: 10px; /* Add separation between items */
-    border: 1px solid #ddd; /* Add a border to the items */
+    background-color: #ffffff;
+    margin-bottom: 10px;
+    border: 1px solid #e0e0e0;
+    border-radius: 4px;
+    transition: transform 0.2s ease;
 }
 
-#posts .list-group-item.active {
-    background-color: #ffffff; /* Ensure active items also have a white background */
-    border-color: #ddd; /* Ensure active items have the same border color */
+#posts .list-group-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
 }
 
 .carousel {
@@ -88,5 +94,59 @@ body {
 
 .post-row > div > div {
     background-color: #ffffff;
-    
+    transition: transform 0.2s ease;
+}
+
+.post-row > div > div:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.btn-secondary {
+    background-color: #2d3436;
+    border: none;
+    padding: 8px 16px;
+    transition: background-color 0.2s ease;
+}
+
+.btn-secondary:hover {
+    background-color: #636e72;
+}
+
+.form-control {
+    border: 1px solid #e0e0e0;
+    padding: 8px 12px;
+}
+
+.form-control:focus {
+    border-color: #2d3436;
+    box-shadow: 0 0 0 0.2rem rgba(45, 52, 54, 0.25);
+}
+
+.text-primary-emphasis {
+    color: #2d3436 !important;
+}
+
+.icon-link {
+    color: #2d3436;
+    text-decoration: none;
+}
+
+.icon-link:hover {
+    color: #636e72;
+}
+
+.nav-scroller {
+    background-color: #2d3436;
+}
+
+.nav-scroller .nav-link {
+    color: #ffffff !important;
+    opacity: 0.9;
+    transition: opacity 0.2s ease;
+}
+
+.nav-scroller .nav-link:hover {
+    opacity: 1;
+    color: #ffffff !important;
 }

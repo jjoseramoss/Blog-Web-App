@@ -11,26 +11,23 @@
 </head>
 <body>
     <%- include("partials/header.ejs") %>
-    <div class="nav-scroller py-1 mb-3 border-bottom border-black">
-        <nav class="nav nav-underline justify-content-evenly">
-            <a class="nav-item nav-link text-white" href="#">Computer Science</a>
-            <a class="nav-item nav-link text-white" href="#">Engineering</a>
-            <a class="nav-item nav-link text-white" href="#">Health</a>
-            <a class="nav-item nav-link text-white" href="#">Liberal Arts</a>
-            <a class="nav-item nav-link text-white" href="#">Other</a>
+    <div class="nav-scroller py-1 mb-4">
+        <nav class="nav nav-underline justify-content-center" aria-label="Category navigation">
+            <a class="nav-item nav-link mx-3" href="#" aria-label="Computer Science category">Computer Science</a>
+            <a class="nav-item nav-link mx-3" href="#" aria-label="Engineering category">Engineering</a>
+            <a class="nav-item nav-link mx-3" href="#" aria-label="Health category">Health</a>
+            <a class="nav-item nav-link mx-3" href="#" aria-label="Liberal Arts category">Liberal Arts</a>
+            <a class="nav-item nav-link mx-3" href="#" aria-label="Other category">Other</a>
         </nav>
     </div>
 
-    <div>
+    <div class="container-fluid">
         <div class="row">
-            <div id="posts" class="d-flex flex-column align-items-stretch flex-shrink-0 mx-4" style="width: 380px;">
-                <a href="/" class="d-flex align-items-center flex-shrink-0 p-3 link-body-emphasis text-decoration-none ">
-                  <svg class="bi pe-none me-2" width="125" height="24"><use xlink:href=""></use></svg>
-                  <span class="fs-5 fw-semibold">Posts</span>
-                </a>
-                <form class="mb-2 " action="/submit" method="POST">
+            <div id="posts" class="col-md-3 mb-4 mx-4">
+                <h2 class="fs-4 fw-semibold mb-3">Create New Post</h2>
+                <form class="mb-4" action="/submit" method="POST">
                     <div class="mb-3">
-                        <label for="title" class="form-label">Category</label>
+                        <label for="category" class="form-label">Category</label>
                         <input type="text" class="form-control" id="category" name="category" required>
                     </div>
                     <div class="mb-3">
@@ -41,50 +38,41 @@
                         <label for="content" class="form-label">Content</label>
                         <textarea class="form-control" id="content" name="content" rows="3" required></textarea>
                     </div>
-                    <button type="submit" class="btn btn-secondary">Submit</button>
+                    <button type="submit" class="btn btn-secondary w-100">Submit Post</button>
                 </form>
-                <div class="list-group list-group-flush scrollarea mx-2">
-                  <% posts.forEach(post => { %>
-                    <a href="#" class="list-group-item list-group-item-action py-3 lh-sm" aria-current="true">
-                        <div class="d-flex w-100 align-items-center justify-content-around">
-                          <strong class="mb-1"><%= post.title %></strong>
-                        </div>
-                        
-                      </a>
-                  <% }) %>
-                </div>
-            </div>
-            
 
-            <div class="col-md-9">
-                    <div class="row post-row">
-                        <% posts.forEach(post => { %>
-                          <div class="col-md-6 mb-4">
-                            <div class="row g-0 border rounded overflow-hidden flex-md-row shadow-sm h-md-250 position-relative">
-                              <div class="col p-4 d-flex flex-column position-static">
-                                <strong class="d-inline-block mb-2 text-primary-emphasis"><%= post.category %></strong>
-                                <h3 class="mb-3"><%= post.title %></h3>
-                                <!-- <div class="mb-1 text-body-secondary">Nov 12</div> -->
-                                <p class="card-text mb-auto"><%= post.content %></p>
-                                <a href="#" class="icon-link gap-1 icon-link-hover stretched-link">
-                                  Continue reading
-                                  <svg class="bi"><use xlink:href="#chevron-right"></use></svg>
-                                </a>
-                              </div>
-                              <div class="col-auto d-none d-lg-block">
-                                <!--Allow user to add their own image-->
-                                <img class="" width="200" height="250" src="/images/cat.jpg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false">
-                                  <title>Placeholder</title>
-                                  <rect width="100%" height="100%" fill="#55595c"></rect>
-                                  
-                                </img>
-                              </div>
-                            </div>
-                          </div>
-                        <% }) %>
-                      </div>
+                <h3 class="fs-5 fw-semibold mb-3">Recent Posts</h3>
+                <div class="list-group list-group-flush">
+                    <% posts.forEach(post => { %>
+                        <a href="#" class="list-group-item list-group-item-action p-3">
+                            <strong class="d-block mb-1"><%= post.title %></strong>
+                            <small class="text-muted"><%= post.category %></small>
+                        </a>
+                    <% }) %>
                 </div>
             </div>
+
+            <main class="col-md-8">
+                <div class="row post-row g-4">
+                    <% posts.forEach(post => { %>
+                        <div class="col-md-6">
+                            <article class="border rounded overflow-hidden h-100 position-relative">
+                                <div class="p-4 d-flex flex-column h-100">
+                                    <span class="badge bg-secondary mb-2"><%= post.category %></span>
+                                    <h3 class="h5 mb-3"><%= post.title %></h3>
+                                    <p class="card-text mb-4"><%= post.content %></p>
+                                    <a href="#" class="icon-link mt-auto stretched-link">
+                                        Read more
+                                        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-right" fill="currentColor">
+                                            <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/>
+                                        </svg>
+                                    </a>
+                                </div>
+                            </article>
+                        </div>
+                    <% }) %>
+                </div>
+            </main>
         </div>
     </div>
 </body>
