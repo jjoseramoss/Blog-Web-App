@@ -10,12 +10,11 @@ const db = new pg.Client({
     host: "localhost",
     database: "blog",
     password: "ONEpiece4LIFE$",
-    port: 5432.
+    port: 5432
 });
 db.connect();
 
-//Allows use of static files in public folder
-app.use(express.static("public"));
+
 
 
 async function getAllPosts(){
@@ -29,7 +28,10 @@ async function getAllPosts(){
 }
 
 // Allows use of req.body
+app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+//Allows use of static files in public folder
+app.use(express.static("public"));
 
 //data structure for posts
 
@@ -46,16 +48,21 @@ app.get('/blog', async(req, res) => {
 //create function to add user data into new data table
 
 
-app.post('/submit', (req, res) =>{
-    const newPost = {
-        title: req.body.title,
-        content: req.body.content,
-        category: req.body.category
-    };
-    posts.push(newPost);
-    res.redirect('/blog')
-
-})
+app.post('/posts', async (req, res) => {
+    try {
+      const { category, title, content } = req.body;
+  
+      await db.query(
+        'INSERT INTO posts (category, title, content) VALUES ($1, $2, $3)',
+        [category, title, content]
+      );
+  
+      res.redirect('/blog'); // Redirect to homepage after insertion
+    } catch (err) {
+      console.error(err.message);
+      res.status(500).send('Server Error');
+    }
+  });
 
 app.listen(port, () => {
     console.log(`Server is running on port ${port}`);
